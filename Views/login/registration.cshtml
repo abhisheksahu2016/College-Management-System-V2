@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Registration";
+}
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h3>Login </h3>
+    @{
+        if (TempData["Error_login_Registration"] != null)
+        {
+            var res = TempData["Error_login_Registration"];
+            <div id="error">
+                <h1>@res.ToString()</h1>
+            </div>
+        }
+    }
+    <form asp-controller="login" asp-action="registration">
+        <table border="0" cellpadding="2" cellspacing="2">
+            <tr>
+                <td><label>User Id </label></td>
+                <td><input type="text" name="FormUserId" id="userId" required maxlength="30"></td>
+            </tr>
+            <tr>
+                <td><label>Name </label></td>
+                <td><input name="FormUserName" id="name" type="text" required maxlength="30" /></></td>
+            </tr>
+            <tr>
+                <td><label>Age </label></td>
+                <td><input name="FormAge" id="age" type="text" required maxlength="30" /></></td>
+            </tr>
+            <tr>
+                <td><label>Password </label></td>
+                <td><input name="FormPassword" type="password" maxlength="30" required id="password" /> </></td>
+            </tr>
+            <tr>
+                <td><label>Pet Name </label></td>
+                <td><input name="FormPetName" type="text" maxlength="30" required id="petname" /> </></td>
+            </tr>
+            <tr>
+                <td><label>Gender</label></td>
+                <td>
+                    <select name="FormGender" id="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Department</label></td>
+                <td>
+                    <select name="FormDeptId" id="department">
+                        <option value="100">Computer Science</option>
+                        <option value="101">Information and Technology</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Semester</label></td>
+                <td>
+                    <select name="FormSemId" id="semester">
+                        <option value="100">Semester - 01</option>
+                        <option value="101">Semester - 02</option>
+                        <option value="102">Semester - 03</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Save" class="btn btn-primary" id="register"/>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <h3>Login </h3>
+    @{
+        if (TempData["Error_login_Login"] != null)
+        {
+            var res = TempData["Error_login_Login"];
+            <div id="error">
+                <h1>@res.ToString()</h1>
+            </div>
+        }
+        if (TempData["Result_login_Login"] != null)
+        {
+            var res = TempData["Result_login_Login"];
+            <div id="message">
+                <h1>@res.ToString()</h1>
+            </div>
+        }
+    }
+    <form method="post" asp-controller="login" asp-action="Login">
+        <table border="0" cellpadding="2" cellspacing="2">
+            <tr>
+                <td><label>User Id</label></td>
+                <td><input type="text" name="userid" id="userId"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" id="password"></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" value="Login" id="login"></td>
+            </tr>
+        </table>
+    </form>
+    <a asp-controller="login" asp-action="registration">Register</a>
+    <a asp-controller="login" asp-action="forgotpassword">Forgot Password</a>
+</body>
+</html>

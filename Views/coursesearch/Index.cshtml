@@ -1,0 +1,60 @@
+﻿@model CMS.Models.B1_View.SearchView
+
+@{
+    ViewData["Title"] = "College Management Services";
+}
+
+
+<form method="post" asp-controller="coursesearch" asp-action="Index">
+    <label for="deptnameid">Dept:</label>
+    <select name="deptname" id="department">
+        <option value="Computer Science">Computer Science</option>
+        <option value="Information and Technology">Information and Technology</option>
+    </select>
+    <label for="semnameid">Dept:</label>
+    <select name="semname" id="semester">
+        <option value="Semester - 01">Semester - 01</option>
+        <option value="Semester - 02">Semester - 02</option>
+        <option value="Semester - 03">Semester - 03</option>
+    </select>
+
+    <input type="submit" value="Search" id="search">
+</form>
+@{
+    if (TempData["Result_coursesearch_search"] != null)
+    {
+        var res = TempData["Result_coursesearch_search"];
+        if (@res.ToString() == "Positive")
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CourseList_Var.FirstOrDefault().CourseId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CourseList_Var.FirstOrDefault().CourseName)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{var count = 0;}
+                    @foreach (var table in Model.CourseList_Var)
+                    {
+                        count = count + 1;
+                        <tr>
+                            @{ var id1 = "courseId"+count.ToString();}
+                            <td id=@id1  >
+                                @table.CourseId
+                            </td>
+                            @{ var id2 = "courseName"+count.ToString();}
+                            <td id=@id2 >
+                                @table.CourseName
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+}

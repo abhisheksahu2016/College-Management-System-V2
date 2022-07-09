@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMS-@ViewData["Title"]</title>
+    <style type="text/css">
+        /* CSS */
+
+        .sidebar {
+            height: 100%;
+            width: 350px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding-top: 40px;
+            background-color: lightblue;
+        }
+
+            .sidebar div {
+                padding: 8px;
+                font-size: 24px;
+                display: block;
+            }
+
+        .body-text {
+            margin-left: 350px;
+            font-size: 18px;
+        }
+
+        table,
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="text-center">
+            <a asp-controller="home" asp-action="">Home</a>
+            <br />
+            <a asp-controller="coursesearch" asp-action="">Course Search</a>
+            <br />
+            @{
+                // TempData is global View Data is local
+                var RoleIdentification = TempData["UserRoleAfterLogin"];
+                if (RoleIdentification != null)
+                {
+                    if (RoleIdentification.ToString() == "Admin")
+                    {
+                        <a asp-controller="studentlist" asp-action="">Student List</a>
+                        <br />
+                        TempData["UserRoleAfterLogin"] = "Admin";
+                    }
+                }
+            }
+            <a asp-controller="login" asp-action="Logout">Logout</a>
+        </div>
+    </div>
+    <div class="body-text">
+        @RenderBody()
+    </div>
+</body>
+</html>

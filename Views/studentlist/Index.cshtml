@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CMS.Models.A1_DB.UserDetail>
+
+@{
+    ViewData["Title"] = "Student List";
+}
+
+@{
+    if (TempData["Result_Student_Delete"] != null)
+    {
+        var res = TempData["Result_Student_Delete"];
+        <div id="">
+            <h1>@res.ToString()</h1>
+        </div>
+    }
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dept)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sem)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var count = 0;}
+
+        @foreach (var item in Model)
+        {
+            count = count + 1;
+        <tr>
+            @{ var id1 = "userName" + count.ToString();}
+            <td id=@id1>
+                @item.Name
+            </td>
+            @{ var id2 = "department" + count.ToString();}
+            <td id=@id2>
+                @item.Dept.DeptCategoryName
+            </td>
+            @{ var id3 = "semester" + count.ToString();}
+            <td id=@id1>
+                @item.Sem.SemCategoryName
+            </td>
+            @{ var id4 = "deleteUser" + count.ToString();}
+            <td id=@id1>
+                <a asp-action="Delete" asp-route-id="@item.UserPkid">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
